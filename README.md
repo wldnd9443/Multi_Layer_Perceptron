@@ -69,7 +69,11 @@ plot_data(X,Y)
 
 한가지 선으로 데이터를 분류하기 어렵도록 배치합니다. (XOR과 유사합니다.)
 
-모델은 Fully Connected Layer로 2:3:3:2의 구조를 갖는걸로 설정합니다. Activation Function은 Sigmoid로 설정합니다. 초기값은 임의로 설정합니다.
+모델은 다음과 같이 정의합니다.
+* Fully Connected Layer 2:3:3:2
+* Activation Function은 Sigmoid로 설정합니다. 
+* 초기값은 임의의 값으로 설정합니다.
+
 ```
 Ni = 2 # input layer
 No = 2 # output layer
