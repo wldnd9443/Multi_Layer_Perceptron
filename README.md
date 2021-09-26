@@ -20,3 +20,68 @@ Multi Layer Perceptron은 기존과 다르게 직선이 아닌 복잡한 형태�
 ![MLP_structure](https://user-images.githubusercontent.com/44831709/134811088-c3aeeb28-75ff-4ad0-804e-d82a4e377208.png)
 
 위와 같은 형태의 Multi Layer Perceptron을 직접 구현하는 과정을 소개하려 합니다.
+
+## 구현 과정
+### Data Generation
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+NOISE = 0.02
+mat_covs = np.array([[[1,0],[0,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[1,0],[0,1]]])*NOISE
+
+mus =  np.array([[1,1],[0,0],[1,0],[0,1]])
+Ns = np.array([400,400,400,400])
+clss = [1,1,0,0]
+
+X = np.zeros((0,mus.shape[1]))
+Y = np.zeros(0)
+
+
+for mu, mat_cov, N, cls in zip(mus, mat_covs, Ns, clss):
+    X_ = np.random.multivariate_normal(mu, mat_cov, N)
+    Y_ = np.ones(N)*cls
+    X = np.vstack((X,X_))
+    Y = np.hstack((Y,Y_))
+    
+cls_unique = np.unique(Y)
+
+def plot_data(X,Y):
+    legends = []
+    for cls in cls_unique:
+        idx = Y==cls
+        plt.plot(X[idx,0],X[idx,1],'.')
+        legends.append(cls.astype('int'))
+
+    plt.xlabel('X1')
+    plt.ylabel('X2')
+    plt.legend(legends)
+    plt.grid(True)
+    plt.xlim([-1,2])
+    plt.ylim([-1,2])
+    plt.show()
+    
+plot_data(X,Y)
+```
+
+![MLP_dataplt](https://user-images.githubusercontent.com/44831709/134707491-6f7679ae-d0ce-4d74-b6bd-7e8045c15f21.png)
+
+한가지 선으로 데이터를 분류하기 어렵도록 배치합니다. (XOR과 유사합니다.)
+
+모델은 Fully Connected Layer로 2:3:3:2의 구조를 갖는걸로 설정합니다. Activation Function은 Sigmoid로 설정합니다. 초기값은 임의로 설정합니다.
+```
+Ni = 2 # input layer
+No = 2 # output layer
+Nhs = [3,3]  # hidden layer
+
+Ws = [] # weights
+Bs = [] # biases
+N_prev = Ni
+for Nh in Nhs:
+    Ws.append(np.random.random((N_prev,Nh)))
+    Bs.append(np.random.random((1,Nh)))
+    N_prev = Nh
+Ws.append(np.random.random((N_prev,No)))
+Bs.append(np.random.random((1,No)))
+```
