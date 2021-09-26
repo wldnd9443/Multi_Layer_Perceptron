@@ -4,9 +4,9 @@
 Multi Layer Perceptron을 tensorflow 없이 직접 구현해보는 코드입니다.
 
 ## 소개
-이 Repository에서는 Linear Regression이나 Logsitic Regression으로는 대표할 수 없는 Data Set을 해석할 수 있는 Multi Layer Perceptron을 직접 구현하고 해석하는 코드를 다룰 것입니다. 데이터들이 항상 선형적인 경향성을 가질 수는 없기 때문입니다. XOR형태의 데이터를 다룰 때 그러합니다.
+이 Repository에서는 선형의 함수로는 분류(Classification)할 수 없는 Data Set을 분류할 수 있도록 돕는 Multi Layer Perceptron을 직접 구현하고 해석하는 코드를 다룰 것입니다. 대표적인 예로 XOR형태의 데이터를 다룰 때 그러합니다.
   
-위와 같은 형식의 데이터는 선형의 그래프도, Sigmoid 함수도 대표할 수 있는 그래프가 없습니다. 
+아래와 같은 형식의 데이터는 선형의 그래프도, Sigmoid 함수도 대표할 수 있는 그래프가 없습니다. 
   
 ![MLP_dataplt](https://user-images.githubusercontent.com/44831709/134707491-6f7679ae-d0ce-4d74-b6bd-7e8045c15f21.png)
 
