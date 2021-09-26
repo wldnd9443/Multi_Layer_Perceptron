@@ -89,3 +89,22 @@ for Nh in Nhs:
 Ws.append(np.random.random((N_prev,No)))
 Bs.append(np.random.random((1,No)))
 ```
+Cost Function을 다음과 같이 설정합니다.
+
+![cost_function](https://user-images.githubusercontent.com/44831709/134814930-d3763bbe-b128-406d-94b1-ba4623b649bd.png)
+
+```
+def sigm(Vin):
+    Vout = 1/(1+np.exp(-Vin))
+    return Vout
+
+def diff_sigm(Vin):
+    Vout = (-np.exp(-Vin))/(1+np.exp(-Vin))**-2
+    return Vout
+
+def predict(X,Ws,Bs):
+    rst = X
+    for W,B in zip(Ws,Bs):
+        rst = rst@W+B
+    return rst[:,0] < rst[:,1]
+```
